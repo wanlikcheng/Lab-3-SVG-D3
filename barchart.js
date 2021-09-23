@@ -7,49 +7,62 @@ d3.csv('buildings.csv').then(data=>{
 
 d3.csv('buildings.csv', d=>{
     return {
-      ...d, // spread operator
-      building: +d.building,
-      country: +d.country,
-      city: +d.city,
-      height_m: +d.height_m,
-      height_ft: +d.height_ft,
-      height_px: +d.height_px,
-      floors: +d.floors,
-      completed: +d.completed,
-      image: +d.image
+        ...d, 
+        completed: +d.completed,
+        floors: +d.floors,
+        height_ft: +d.height_ft,
+        height_m: +d.height_m,
+        height_px: +d.height_px, 
     }
   }).then(data=>{
-      buildings = data;
-      console.log('buildings', data);
+        buildings = data;
+        console.log('buildings', data);
+
+        d3.select('.building-name').text("Buildings");
+
+        // filter
+        const sorted = data.sort(function(a, b) {
+            return b.height_m - a.height_m;
+        })
+        console.log("Sorted:", sorted);
+
+        
+
+        // Create SVG element
+        const width = 500;
+        const height = 500;
+        const svg = d3.select(".building-chart")
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height)
+
+        svg.selectAll("rect")
+            .data(sorted)
+            .enter()
+            .append("rect")
+            .attr("x", 300)
+            .attr("y", function(d, i) {
+                return i * 45;
+            })
+            .attr("width", d=>d.height_px)
+            .attr("height", 40)
+            .attr("fill", "orange");
+        
+        // labels
+        svg.selectAll("text")
+            .data(sorted)
+            .enter()
+            .append("text")
+            .text(d=>d.building)
+            .attr("x", 50)
+            .attr("y", function(d, i) {
+                return 20 + i * 47;
+            })
+            .attr("font-size", function(d) {
+                return 15;
+            })
+
     })
 
-d3.csv('buildings.csv', d3.autoType).then(data=>{
-    buildings = data;
-    console.log('buildings', data);
-})
 
-// filter dataset by height
-
-
-d3.select('.building-name').text("Buildings");
-
-// draw a rectangle for each city
-
-//Create SVG element
-var svg = d3.select("body")
-            .append("svg")
-            .attr("width", w)
-            .attr("height", h);
-
-svg.selectAll("rect")
-    .data(dataset)
-    .enter()
-    .append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", 20)
-    .attr("height", 100);
-
-
-// labels for top buildings
 
