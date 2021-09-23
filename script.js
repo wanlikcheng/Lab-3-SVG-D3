@@ -22,7 +22,7 @@ d3.csv('cities.csv', d=>{
 
         console.log("Filtered", cities);
 
-        d3.select('.city-count').text("Number of cities");
+        d3.select('.city-count').text("Number of cities: 29");
 
         // draw a circle for each city
         const width = 700;
@@ -54,8 +54,8 @@ d3.csv('cities.csv', d=>{
             .enter()
             .append("text")
             .text(d=>d.city)
-            .attr("x", d=>d.x)
-            .attr("y", d=>d.y)
+            .attr("x", d=>d.x + 10)
+            .attr("y", d=>d.y + 10)
             .attr("opacity", function(d) {
                 if(d.population > 1000000) {
                     return 100;
@@ -64,7 +64,7 @@ d3.csv('cities.csv', d=>{
                     return 0;
                 }
             })
-            .attr("fontsize", function(d) {
+            .attr("font-size", function(d) {
                 return 10;
             })
 
