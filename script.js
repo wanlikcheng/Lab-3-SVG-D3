@@ -22,7 +22,7 @@ d3.csv('cities.csv', d=>{
 
         console.log("Filtered", cities);
 
-        d3.select('.city-count').text("Number of cities: 29");
+        d3.select('.city-count').text("Number of cities: 28");
 
         // draw a circle for each city
         const width = 700;
