@@ -47,10 +47,10 @@ d3.csv('buildings.csv', d=>{
             .attr("fill", "orange")
             .on("click", (event, d) => {
                 console.log("clicked", d);
-                d3.select('.image').attr(src = d.image);
-                d3.select('.height').text(d.height_ft) + "ft";
+                d3.select('.image').attr("src", d.image);
+                d3.select('.height').text(d.height_ft + " ft");
                 d3.select('.city').text(d.city);
-                d3.select('.country').text(d.building);
+                d3.select('.country').text(d.country);
                 d3.select('.floors').text(d.floors);
                 d3.select('.completed').text(d.completed);
             });
