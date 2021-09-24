@@ -44,9 +44,18 @@ d3.csv('buildings.csv', d=>{
             })
             .attr("width", d=>d.height_px)
             .attr("height", 40)
-            .attr("fill", "orange");
+            .attr("fill", "orange")
+            .on("click", (event, d) => {
+                console.log("clicked", d);
+                d3.select('.image').attr(src = d.image);
+                d3.select('.height').text(d.height_ft) + "ft";
+                d3.select('.city').text(d.city);
+                d3.select('.country').text(d.building);
+                d3.select('.floors').text(d.floors);
+                d3.select('.completed').text(d.completed);
+            });
         
-        // labels
+        //labels
         svg.selectAll("text")
             .data(sorted)
             .enter()
@@ -54,11 +63,28 @@ d3.csv('buildings.csv', d=>{
             .text(d=>d.building)
             .attr("x", 50)
             .attr("y", function(d, i) {
-                return 20 + i * 47;
+                return 20 + i * 46.5;
+            })
+            .attr("font-size", function(d) {
+                return 10;
+            });
+        
+        svg.selectAll("text.height-label")
+            .data(sorted)
+            .enter()
+            .append("text")
+            .text(d=>d.height_ft + " ft")
+            .attr("x", function(d, i) {
+                return 190 + d.height_px;
+            })
+            .attr("y", function(d, i) {
+                return 20 + i * 46.5;
             })
             .attr("font-size", function(d) {
                 return 10;
             })
+            .attr("text-anchor", "end") 
+            .attr("fill", "white");
 
     })
 
