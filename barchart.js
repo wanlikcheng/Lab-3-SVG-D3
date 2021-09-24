@@ -26,8 +26,6 @@ d3.csv('buildings.csv', d=>{
         })
         console.log("Sorted:", sorted);
 
-        
-
         // Create SVG element
         const width = 500;
         const height = 500;
@@ -40,7 +38,7 @@ d3.csv('buildings.csv', d=>{
             .data(sorted)
             .enter()
             .append("rect")
-            .attr("x", 300)
+            .attr("x", 200)
             .attr("y", function(d, i) {
                 return i * 45;
             })
@@ -59,10 +57,8 @@ d3.csv('buildings.csv', d=>{
                 return 20 + i * 47;
             })
             .attr("font-size", function(d) {
-                return 15;
+                return 10;
             })
 
     })
-
-
 
